@@ -15,6 +15,15 @@ Instructions for running container:
 - run `docker compose up -d` to run the container
 - when finished, run `docker compose down` to stop the container
 
+Instructions for connecting to container from Azure Data Studio (ADS):
+
+- open up the Connections menu in the upper left of ADS
+- click on New Connection
+- Server: localhost
+- 'User name': sa
+- Password: use the password from the .env file
+- leave the rest of the values as their defaults
+
 If you prefer to use `docker container run` instead of `docker compose`:
 
 - basic `run` command: `docker container run --name aw -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest`
