@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   aw:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    build: .
+    image: aw-in-docker
     container_name: aw
     volumes: 
       - adventureworks-data:/var/opt/mssql

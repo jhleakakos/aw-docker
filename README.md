@@ -10,13 +10,10 @@ Reference pages:
 Running MSSQL container:
 
 - pull docker image: `docker pull mcr.microsoft.com/mssql/server:2019-latest`
+- download AdventureWorks2019.bak from the link above
 - create a .env file in project root with a password for the MSSQL_PWD variable
 - run `docker compose up -d` to run the container
 - when finished, run `docker compose down` to stop the container
-
-If you prefer to use `docker container run` instead of `docker compose`:
-
-- basic `run` command: `docker container run --name aw -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest`
 
 Connecting to container from Azure Data Studio (ADS):
 
@@ -27,11 +24,6 @@ Connecting to container from Azure Data Studio (ADS):
 - Password: use the password from the .env file
 - leave the rest of the values as their defaults
 
-Download bak file and copy into container:
-
-- download AdventureWorks2019.bak from the link above
-- copy the bak file into the container: `docker container cp AdventureWorks2019.bak aw:/var/opt/mssql`
-
 Restoring AdventureWorks database from bak file in ADS with GUI:
 
 - if the management pane in AD isn't open, double click on the localhost connection or right click and select Manage
@@ -39,9 +31,7 @@ Restoring AdventureWorks database from bak file in ADS with GUI:
 - select Restore
 - go to the General tab
 - in Source, change 'Restore from' to 'Backup file'
-- in 'Backup file path,' select /var/opt/mssql/AdventureWorks.bak (or whichever location you cp-ed the file into a few steps back)
-- the Database value will auto-populate with AdventureWorks2019
-- in Destination, 'Target database' will auto-populate with AdventureWorks2019
+- in 'Backup file path,' select /var/opt/mssql/AdventureWorks2019.bak
 - select Restore at the bottom
 
 Restoring AdventureWorks database with SQL script:
@@ -52,7 +42,7 @@ At this point, we have SQL Server running locally in Docker, we've connected to 
 
 When we want to work with the database going forward:
 
-- make sure Docker is running on your computer
+- make sure Docker is running
 - navigate to the project directory
 - run `docker compose up -d` to start the container
 - connect through ADS
